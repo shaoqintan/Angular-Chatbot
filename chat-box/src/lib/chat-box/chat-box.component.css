@@ -1,0 +1,105 @@
+:host {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 10;
+}
+
+.experimental {
+    font-size: 11px;
+    padding: 0 8px;
+    margin-right: 1rem;
+    color: #BBDEFB;
+    border: 1px solid #BBDEFB;
+    border-radius: 4px;
+}
+
+.chat-threads {
+    margin: 10px 6px 0px 6px;
+    background: #e2e8f0;
+    padding: 0.8rem;
+    border-radius: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat-bubble {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 14px;
+    width: fit-content;
+    margin-bottom: 8px;
+}
+.chat-bubble >>> p {
+    margin: 0;
+}
+
+.chat-bubble.assistant {
+    background: white;
+    margin-right: 2rem;
+}
+
+.chat-bubble.user {
+    background: #374750;
+    color: white;
+    margin-left: 2rem;
+    align-self: end;
+}
+
+.input-box {
+    padding: 10px 6px 6px 6px;
+}
+
+.input-bar {
+    background: #f0f2f5;
+    padding: 0px 10px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+}
+
+.input-field {
+    background: transparent;
+    border: none;
+}
+
+.input-bar:focus-within {
+    box-shadow: 0 0 1px 1px lightsteelblue;
+}
+
+.typing-indicator {
+    margin: 12px 8px;
+    width: fit-content;
+}
+
+.dot {
+    background-color: LightSteelBlue;
+    animation: typingAnimation 1.5s infinite ease-in-out;
+    border-radius: 100%;
+    display: inline-block;
+    height: 8px;
+    margin: 2px;
+    width: 8px;
+}
+
+@keyframes typingAnimation{
+    0%{
+        -webkit-transform:translateY(0px)
+    }
+    28%{
+        -webkit-transform:translateY(-5px)
+    }
+    44%{
+        -webkit-transform:translateY(0px)
+    }
+}
+
+.dot:nth-child(1){
+    animation-delay:200ms;
+}
+.dot:nth-child(2){
+    animation-delay:300ms;
+}
+.dot:nth-child(3){
+    animation-delay:400ms;
+}

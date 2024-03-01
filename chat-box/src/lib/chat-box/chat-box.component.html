@@ -1,0 +1,53 @@
+<div class="toggle-chat-box">
+    <v-one-popover #chatBoxPopover [header]="true" [resizable]="true" [draggable]="true" [height]="popoverHeight" [width]="popoverWidth"
+        [backdrop]="false" [onBackdropClickClose]="false" (showChange)="popoverShowing = $event">
+        <div class="header" fxLayout>
+            <div fxFlex></div>
+            <div fxLayout fxLayoutAlign="start center">
+                <div class="experimental">Experimental</div>
+            </div>
+            <button mat-icon-button (click)="clearAllChats()">
+                <mat-icon>delete_sweep</mat-icon>
+            </button>
+        </div>
+        <div fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" class="chat-threads" #chatThreads>
+                <ng-container *ngFor="let chat of chats">
+                    <div class="chat-bubble" *ngIf="!chat.hidden" @popOut
+                        [class.assistant]="chat.role === 'assistant'"
+                        [class.user]="chat.role === 'user'"
+                        [ngStyle]="chat.bubbleStyle">
+                        <ngx-md *ngIf="!chat.component" [data]="chat.message"></ngx-md>
+                        <ng-container *ngIf="chat.template">
+                            <ng-container [ngTemplateOutlet]="chat.template" [ngTemplateOutletContext]="{ data: chat.data }"></ng-container>
+                        </ng-container>
+                    </div>
+                </ng-container>
+                <div *ngIf="loading">
+                    <div class="typing-indicator" [@popOut]>
+                        <div class="dotblock">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-box">
+                <div fxLayoutAlign="center" fxLayoutGap="10px">
+                    <div class="input-bar" fxFlex fxLayoutAlign="center">
+                        <input class="input-field" fxFlex type="text" placeholder="Message..." (keydown.enter)="addMessage({ message: message, role: 'user' }, true)" [(ngModel)]="message">
+                    </div>
+                    <button mat-icon-button (click)="addMessage({ message: message, role: 'user' }, true)" [disabled]="loading || !message">
+                        <mat-icon color="accent">send</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </v-one-popover>
+    
+    <button mat-fab (click)="toggleChatBox()">
+        <mat-icon>{{ !popoverShowing ? 'question_answer' : 'close' }}</mat-icon>
+    </button>
+</div>
