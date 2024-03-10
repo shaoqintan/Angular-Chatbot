@@ -21,7 +21,7 @@ import { FileUploadService } from './file-uploader.service';
 @Controller('file-upload')
 @ApiTags('File Upload')
 export class FileUploadController {
-  constructor(private sequelize: Sequelize, @InjectModel(Files)
+  constructor(@InjectModel(Files)
   private filesModel: typeof Files, private fileUploadService: FileUploadService) { }
   @Post('upload')
   @UseInterceptors(FilesInterceptor('files', 3, {
