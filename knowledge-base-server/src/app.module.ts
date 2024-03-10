@@ -10,6 +10,7 @@ import { FileUploadModule } from './file-uploader/file-uploader.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Files } from './file-uploader/file-uploader.model';
 @Module({
   imports: [
     PineconeClientModule,
@@ -19,9 +20,21 @@ import { SequelizeModule } from '@nestjs/sequelize';
     IngestDataModule,
     CustomPDFLoaderModule,
     ChatModule,
+    FileUploadModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..'),
       renderPath: '/docs',
+    }),
+    SequelizeModule.forRoot({
+      dialect: 'postgres',
+      host: '10.0.17.35',
+      port: 32432,
+      username: 'vone',
+      password: 'vone',
+      database: 'knowledge_base',
+      autoLoadModels: true,
+      synchronize: true,
+
     }),
   ],
   controllers: [AppController],
